@@ -1,0 +1,26 @@
+{
+    "setting": {
+        "prompt_path": "apps\\codexgraph_agent\\prompt",
+        "repo_path": "D:\\study\\postgraduate\\study_project\\alibaba_LLM\\codexgraph\\test_repo\\test_repo",
+        "llm_model_name": "deepseek-coder",
+        "llm_temperature": 1.0,
+        "max_iterations": 5,
+        "project_list": [
+            "code_unittest",
+            "code_annotate",
+            "modelscope_agent"
+        ],
+        "project_id": "code_unittest",
+        "env_path_dict": {
+            "env_path": "C:\\Users\\12053\\anaconda3\\envs\\test\\python.exe",
+            "script_path": "D:\\study\\postgraduate\\study_project\\alibaba_LLM\\codexgraph\\indexer\\graph_db\\indexer\\run_index_single.py",
+            "working_directory": "D:\\study\\postgraduate\\study_project\\alibaba_LLM\\codexgraph\\indexer\\graph_db"
+        },
+        "neo4j": {
+            "url": "bolt://localhost:7687",
+            "user": "neo4j",
+            "password": "12345678",
+            "database_name": "neo4j"
+        }
+    }
+}
