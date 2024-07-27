@@ -26,6 +26,9 @@ def sidebar():
 
         st.markdown("---")
         st.markdown("# About")
+        st.markdown("""
+**CodexGraph** Agent is an advanced multi-tasking agent that integrates a language model (LM) agent with a code graph database interface. By utilizing the structural characteristics of graph databases and the versatility of the Cypher query language, CodexGraph enables the LM agent to formulate and execute multi-step queries. This capability allows for precise context retrieval and code navigation that is aware of the code's structure.
+        """)
 
         st.markdown("---")
         st.markdown(

@@ -199,6 +199,15 @@ class PageBase(ABC):
             else:
                 st.session_state[self.page_name]['test_connect_place'].error("Connect error")
 
+        if not os.path.exists(st.session_state.shared['setting']['repo_path']):
+            self.warning('Enter a correct repo path')
+
+        if not st.session_state.shared['setting']['neo4j']['url'] or \
+            not st.session_state.shared['setting']['neo4j']['user'] or \
+            not st.session_state.shared['setting']['neo4j']['password'] or \
+            not st.session_state.shared['setting']['neo4j']['database_name']:
+            self.warning('Please setting Neo4j')
+
     def get_graph_db(self, task_id=''):
         try:
             graph_db = GraphDatabaseHandler(
@@ -216,8 +225,8 @@ class PageBase(ABC):
 
     def build_graph_db(self):
         env_path_dict = {
-            'env_path': r"C:\Users\12053\anaconda3\envs\test\python.exe",
-            'working_directory': r"D:\study\postgraduate\study_project\alibaba_LLM\codexgraph\indexer_test",
+            'env_path': st.session_state.shared['setting']['env_path_dict']['env_path'],
+            'working_directory': st.session_state.shared['setting']['env_path_dict']['working_directory'],
             'url': st.session_state.shared['setting']['neo4j']['url'],
             'user': st.session_state.shared['setting']['neo4j']['user'],
             'password': st.session_state.shared['setting']['neo4j']['password'],
