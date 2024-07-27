@@ -100,11 +100,11 @@ class LocalTaskExecutor:
     @staticmethod
     def get_generator_result(generator) -> str:
         """
-        get the result from a generator
+        get the result from a code_generator
         Args:
             generator:
 
-        Returns: the next string result from generator
+        Returns: the next string result from code_generator
 
         """
         return next(generator)

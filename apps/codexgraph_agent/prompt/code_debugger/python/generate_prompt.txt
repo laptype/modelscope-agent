@@ -1,32 +1,24 @@
-${message} Please generate new code:
-
-### User's Requirements:
-```text
-# file path: ${file_path}
-${code_requirements}
+Write a patch for the issue, based on the retrieved context.
+You can import necessary libraries.
+Return the patch in the format below:
+You can write multiple modifications if needed.
 ```
+# modification 1
+<file>...</file>
+<original>...</original>
+<patched>...</patched>
 
-#### Final Output Format:
-You only need to return the newly added code, not the original code
-You will format your final output as follows:
-```python
-{{new_code}}
-```
+# modification 2
+<file>...</file>
+<original>...</original>
+<patched>...</patched>
 
-### Example of adding new code:
-- Requirements
-```python
-class MathOperations:
-    def add(self, a, b):
-        return a + b
-TODO: add a new function named divide
+# modification 3
+...
 ```
-- Expected Final Output: (only need to return the newly added code)
-```python
-    def divide(self, a, b):
-        if b == 0:
-        raise ValueError("The divisor 'b' cannot be zero.")
-        return a / b
-```
+Within `<file></file>`, replace `...` with actual file path.
 
+Within `<original></original>`, replace `...` with the original code snippet from the program.
+
+Within `<patched></patched>`, replace `...` with the fixed version of the original code. When adding original code and updated code, pay attention to indentation, as the code is in Python.
 

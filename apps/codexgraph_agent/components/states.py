@@ -30,11 +30,13 @@ def initialize_page_state(page_name):
             'input_text': '',
             'input_file_path': '',
 
+            'error_place': None,
             'reload_button': None,
             'test_connect_button': None,
             'build_button': None,
             'test_connect_place': None,
             'build_place': None,
+            'progress_bar': None,
             'conversation_container': None,
             'conversation_container_chat': None,
 

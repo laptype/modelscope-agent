@@ -4,26 +4,48 @@ import time
 import json
 
 from apps.codexgraph_agent.components.page import PageBase, agent_test_run
+from modelscope_agent.agents.codexgraph_agent import CodexGraphAgentDebugger
 
 
 class CodeDebuggerPage(PageBase):
     def __init__(self):
         super().__init__(task_name='code_debugger',
                          page_title="🛠️ Code Debugger",
-                         output_path='CD_conversation',
+                         output_path='log\CD_conversation',
                          input_title="Bug Issue",
                          default_input_text="Please input the code snippet and describe the bug or issue you are facing. Include any error messages if available.")
+        self.agent = self.get_agent()
 
+    def get_agent(self):
+        graph_db = self.get_graph_db(st.session_state.shared['setting']['project_id'])
 
-    def agent(self):
-        st.session_state[self.page_name]['final_result'] = ''
+        if not graph_db:
+            return None
 
-        answer = agent_test_run(user_query=st.session_state[self.page_name]['input_text'],
-                                file_path=st.session_state[self.page_name]['input_file_path'],
-                                call_back=self.update_message)
+        llm_config = {
+            'model': 'deepseek-coder',
+            'api_base': 'https://api.deepseek.com',
+            'model_server': 'openai'
+        }
 
-        st.session_state[self.page_name]['final_result'] = 'aaa'
+        prompt_path = os.path.join(st.session_state.shared['setting']['prompt_path'], 'code_debugger')
+        schema_path = os.path.join(st.session_state.shared['setting']['prompt_path'], 'graph_database')
 
+        try:
+            agent = CodexGraphAgentDebugger(llm=llm_config,
+                                            prompt_path=prompt_path,
+                                            schema_path=schema_path,
+                                            task_id=st.session_state.shared['setting']['project_id'],
+                                            graph_db=graph_db,
+                                            max_iterations=5,
+                                            message_callback=self.create_update_message())
+        except:
+            agent = None
+        return agent
+
+def show():
+    page = CodeDebuggerPage()
+    page.main()
 
 if __name__ == '__main__':
     page = CodeDebuggerPage()
